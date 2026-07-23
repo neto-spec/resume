@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neto Andrade — Product Design Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0f; color: #e4e4e7; line-height: 1.6; }
+  a { text-decoration: none; }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* Hero */
+  .hero { background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0f 100%); padding: 80px 48px 48px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%); border-radius: 50%; }
+  .photo-wrap { width: 130px; height: 130px; border-radius: 50%; margin: 0 auto 24px; overflow: hidden; border: 3px solid #f59e0b; box-shadow: 0 0 40px rgba(245,158,11,0.2); position: relative; z-index: 1; }
+  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .name { font-size: 42px; font-weight: 800; color: #fafafa; letter-spacing: -1px; }
+  .role { font-size: 18px; color: #f59e0b; margin-top: 10px; font-weight: 500; }
+  .tags { font-size: 14px; color: #71717a; margin-top: 8px; }
+  .btns { margin-top: 28px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: #f59e0b; color: #0a0a0f; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn-secondary { background: #27272a; color: #e4e4e7; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s; }
+  .btn-secondary:hover { background: #3f3f46; }
+
+  /* Manifesto */
+  .manifesto { padding: 48px; text-align: center; max-width: 680px; margin: 0 auto; }
+  .manifesto p { font-size: 19px; line-height: 1.7; color: #d4d4d8; }
+  .manifesto strong { color: #f59e0b; }
+  .manifesto strong.green { color: #34d399; }
+
+  /* Sections */
+  .section { border-top: 1px solid #27272a; }
+  .section-header { padding: 28px 48px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; user-select: none; }
+  .section-header:hover { background: rgba(255,255,255,0.02); }
+  .section-title { font-size: 15px; text-transform: uppercase; letter-spacing: 2px; color: #f59e0b; margin: 0; font-weight: 700; }
+  .section-sub { font-size: 13px; color: #71717a; margin: 4px 0 0 0; }
+  .toggle { font-size: 20px; color: #f59e0b; transition: transform 0.3s; display: inline-block; }
+  .toggle.open { transform: rotate(180deg); }
+  .section-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, padding 0.4s ease-out; padding: 0 48px; }
+  .section-body.open { max-height: 3000px; padding: 8px 48px 48px; }
+
+  /* Cards */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .card { background: rgba(255,255,255,0.03); padding: 24px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: transform 0.2s, border-color 0.2s; }
+  .card:hover { transform: translateY(-4px); border-color: rgba(245,158,11,0.2); }
+  .card-num { font-size: 32px; font-weight: 800; }
+  .card-label { font-size: 12px; color: #a1a1aa; margin-top: 6px; }
+  .card-prod { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s; }
+  .card-prod:hover { transform: translateY(-2px); }
+  .card-prod h4 { margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: #fafafa; }
+  .card-prod p { margin: 0; font-size: 12px; color: #a1a1aa; line-height: 1.5; }
+
+  .highlight { background: rgba(255,255,255,0.03); padding: 24px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s; }
+  .highlight:hover { transform: translateY(-2px); }
+  .highlight h4 { margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #fafafa; }
+  .highlight p { margin: 0; font-size: 13px; color: #a1a1aa; line-height: 1.6; }
+  .highlight strong { color: #f59e0b; }
+
+  /* Movimentos */
+  .mov-card { display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.03); padding: 24px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s; }
+  .mov-card:hover { transform: translateY(-2px); }
+  .mov-logo { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 13px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 10px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, #f59e0b, #27272a); }
+  .tl-item { margin-bottom: 28px; position: relative; }
+  .tl-dot { position: absolute; left: -22px; top: 4px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #0a0a0f; }
+  .tl-role { margin: 0; font-size: 15px; font-weight: 700; color: #fafafa; }
+  .tl-co { margin: 3px 0 0 0; font-size: 13px; font-weight: 600; }
+  .tl-period { font-size: 12px; color: #71717a; }
+  .tl-desc { margin: 6px 0 0 0; font-size: 12px; color: #a1a1aa; }
+
+  /* Skills */
+  .skill-pill { background: rgba(255,255,255,0.03); padding: 14px 18px; border-radius: 10px; border-left: 3px solid; font-size: 13px; color: #e4e4e7; font-weight: 600; line-height: 1.5; transition: transform 0.2s; }
+  .skill-pill:hover { transform: translateX(4px); }
+  .skill-label { font-size: 11px; color: #71717a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+
+  /* CTA */
+  .cta { padding: 64px 48px; text-align: center; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0f 100%); border-top: 1px solid #27272a; }
+  .cta h2 { font-size: 28px; font-weight: 800; margin: 0 0 12px 0; color: #fafafa; }
+  .cta p { font-size: 15px; color: #a1a1aa; margin: 0 0 28px 0; }
+  .wa-num { margin: 14px 0 0 0; font-size: 13px; color: #71717a; }
+
+  /* Footer */
+  .footer { padding: 24px 48px; text-align: center; background: #0a0a0f; border-top: 1px solid #27272a; }
+  .footer p { margin: 0; font-size: 12px; color: #52525b; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero { padding: 48px 24px 36px; }
+    .name { font-size: 32px; }
+    .manifesto { padding: 32px 24px; }
+    .manifesto p { font-size: 16px; }
+    .section-header { padding: 20px 24px; }
+    .section-body.open { padding: 8px 24px 32px; }
+    .section-body { padding: 0 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="photo-wrap">
+      <img src="https://i.imgur.com/placeholder.jpg" alt="Neto Andrade" id="profile-photo">
+    </div>
+    <h1 class="name">Neto Andrade</h1>
+    <p class="role">Partner & Gerente Sênior de Product Design</p>
+    <p class="tags">Fintech • iFood • Inteligência Artificial</p>
+    <div class="btns">
+      <a href="https://linkedin.com/in/netoandrade" target="_blank" class="btn-primary">🔗 LinkedIn</a>
+      <a href="https://wa.me/5511963862077" target="_blank" class="btn-secondary">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Manifesto -->
+  <div class="manifesto">
+    <p>Mais de uma década transformando design em <strong>motor de receita</strong>. Saí do iFood como Visual Designer em 2017. Voltei em 2021 para liderar do <strong class="green">zero</strong> o design do braço financeiro que hoje representa <strong>25% do faturamento da empresa</strong>.</p>
+  </div>
+
+  <!-- SEÇÃO 1: Impacto Mensurável -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div>
+        <h2 class="section-title">📊 Impacto Mensurável</h2>
+        <p class="section-sub">Números que provam que design move negócio</p>
+      </div>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="card-grid" style="margin-bottom:20px">
+        <div class="card"><div class="card-num" style="color:#f59e0b">R$ 2,5bi</div><div class="card-label">Receita líquida · dobra em 1 ano</div></div>
+        <div class="card"><div class="card-num" style="color:#34d399">25%</div><div class="card-label">Da receita total do iFood</div></div>
+        <div class="card"><div class="card-num" style="color:#60a5fa">R$ 1,8bi</div><div class="card-label">Carteira de crédito restaurantes</div></div>
+        <div class="card"><div class="card-num" style="color:#a78bfa">93%</div><div class="card-label">Crescimento Zoop (YoY)</div></div>
+      </div>
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="card-prod"><h4>💳 Cartão iFood Pago</h4><p>Crédito e débito para restaurantes com até 4% de cashback no iFood Shop</p></div>
+        <div class="card-prod"><h4>🎁 iFood Benefícios</h4><p>R$ 1bi/mês em volume de recarga. Benefícios corporativos flexíveis em um único cartão</p></div>
+        <div class="card-prod"><h4>🏦 Banco dos Restaurantes</h4><p>Contas digitais, gestão financeira e serviços bancários integrados ao ecossistema</p></div>
+        <div class="card-prod"><h4>📊 Modelos Preditivos</h4><p>Mitigação de riscos de inadimplência via dados operacionais proprietários</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2: Liderança Estratégica -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div>
+        <h2 class="section-title">🎯 Liderança Estratégica</h2>
+        <p class="section-sub">Pensamento data-driven e visão de longo prazo</p>
+      </div>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+        <div class="highlight">
+          <h4>🚀 De Delivery para Ecossistema</h4>
+          <p>O iFood marcou sua transição de app de entrega para ecossistema diversificado. As frentes fora do food delivery já respondem por <strong>33%</strong> do faturamento total.</p>
+        </div>
+        <div class="highlight">
+          <h4>💰 Motor de Liquidez</h4>
+          <p>O braço iFood Pago converteu-se em motor essencial de liquidez, praticamente <strong style="color:#34d399">dobrando de tamanho em um ano</strong> com R$ 2,5bi em receita líquida.</p>
+        </div>
+        <div class="highlight">
+          <h4>🛡️ Risco Mitigado</h4>
+          <p>Carteira de crédito de quase <strong style="color:#60a5fa">R$ 2bi</strong> para restaurantes parceiros, com modelos preditivos proprietários que mitigam riscos de inadimplência.</p>
+        </div>
+        <div class="highlight">
+          <h4>📱 140 Mil Contas Ativas</h4>
+          <p>Mais de <strong style="color:#a78bfa">140 mil contas digitais ativas</strong> para restaurantes, com ferramentas essenciais para conhecerem e gerenciarem suas finanças.</p>
+        </div>
+        <div class="highlight">
+          <h4>📈 R$ 70 Bi Transacionados</h4>
+          <p>Volume impressionante de <strong style="color:#f472b6">R$ 70 bilhões</strong> transacionados anualmente, demonstrando confiança e adesão dos empreendedores.</p>
+        </div>
+        <div class="highlight">
+          <h4>🏆 Primeiro do Tipo</h4>
+          <p>A <strong style="color:#fbbf24">primeira marca bancária</strong> dedicada exclusivamente a restaurantes, com soluções financeiras sob medida para o setor de alimentação.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: Negociações Estratégicas -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div>
+        <h2 class="section-title">🤝 Negociações Estratégicas</h2>
+        <p class="section-sub">Movimentos que redefiniram o mercado financeiro</p>
+      </div>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="mov-card">
+          <div class="mov-logo" style="background:#fbce07;color:#dd1d21">SH</div>
+          <div>
+            <h4 style="margin:0;font-size:16px;font-weight:700;color:#fafafa">Shell</h4>
+            <p style="margin:6px 0 0 0;font-size:13px;color:#a1a1aa;line-height:1.6">Co-fundador do gateway de pagamentos próprio da Shell que se transformou na fintech interna responsável pelos pagamentos de todas as pessoas funcionárias. Hoje a fintech já é utilizada por toda a rede de postos Shell em torno do mundo e é considerada parte relevante da cadeia de valor da Shell Box, uma vez que disponibiliza contas de pagamento para os revendedores dos postos.</p>
+          </div>
+        </div>
+        <div class="mov-card">
+          <div class="mov-logo" style="background:#0066cc">GL</div>
+          <div>
+            <h4 style="margin:0;font-size:16px;font-weight:700;color:#fafafa">Globo</h4>
+            <p style="margin:6px 0 0 0;font-size:13px;color:#a1a1aa;line-height:1.6">Articulação para transformar o Gateway da Shell em whitelabel e replicar o produto dentro do Grupo Globo, funcionando como fintech própria do grupo. R$ 35 milhões foram dedicados pela Globo para iniciar sua frente de crédito.</p>
+          </div>
+        </div>
+        <div class="mov-card">
+          <div class="mov-logo" style="background:#00a3e0">GB</div>
+          <div>
+            <h4 style="margin:0;font-size:16px;font-weight:700;color:#fafafa">GuiaBolso <span style="font-size:12px;color:#71717a;font-weight:400">(Investida do grupo Kaszek)</span></h4>
+            <p style="margin:6px 0 0 0;font-size:13px;color:#a1a1aa;line-height:1.6">Principal Product Designer na preparação do app para aquisição estratégica (venda para o PicPay). Otimização da categorização automática de gastos, planejamento financeiro pessoal e futuras versões do app.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4: Trajetória -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div>
+        <h2 class="section-title">📍 Trajetória</h2>
+        <p class="section-sub">12+ anos evoluindo de Visual Designer a líder de design</p>
+      </div>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#f59e0b"></div>
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div><p class="tl-role">Partner & Gerente Sênior de Product Design</p><p class="tl-co" style="color:#f59e0b">iFood — B2B & Fintech</p></div>
+            <span class="tl-period">Set 2021 — Atual</span>
+          </div>
+          <p class="tl-desc">Liderança do design do iFood Pago, iFood Benefícios, Zoop, Cartão iFood Pago e Banco dos Restaurantes.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#0066cc"></div>
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div><p class="tl-role">Head of Product Design</p><p class="tl-co" style="color:#60a5fa">Globo — B2C & Fintech</p></div>
+            <span class="tl-period">Nov 2020 — Set 2021</span>
+          </div>
+          <p class="tl-desc">Joint venture com Shell. Gateway de pagamentos próprio. R$ 35mi investidos.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#fbce07"></div>
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div><p class="tl-role">Head of Product Design</p><p class="tl-co" style="color:#fbbf24">Shell — B2B & Fintech</p></div>
+            <span class="tl-period">Jun 2018 — Nov 2020</span>
+          </div>
+          <p class="tl-desc">Fintech para rede de postos Shell. Contas de pagamento para revendedores via Shell Box.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#00a3e0"></div>
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div><p class="tl-role">Principal Product Designer</p><p class="tl-co" style="color:#38bdf8">GuiaBolso — B2C & Fintech</p></div>
+            <span class="tl-period">Jul 2017 — Jul 2018</span>
+          </div>
+          <p class="tl-desc">Preparação do app para aquisição pelo PicPay. Planejamento financeiro pessoal.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#ea1d2c"></div>
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div><p class="tl-role">Visual Designer</p><p class="tl-co" style="color:#f87171">iFood</p></div>
+            <span class="tl-period">Mar 2014 — Jul 2017</span>
+          </div>
+          <p class="tl-desc">Período de grande crescimento. Empresa incorporada pela Movile.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#f40009"></div>
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div><p class="tl-role">Surface Designer</p><p class="tl-co" style="color:#fb7185">The Coca-Cola Company — Colcci</p></div>
+            <span class="tl-period">Fev 2013 — Abr 2014</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 5: Como eu lidero -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div>
+        <h2 class="section-title">💡 Como eu lidero</h2>
+        <p class="section-sub">Competências que sustentam resultados de bilhões</p>
+      </div>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <p class="skill-label">Soft Skills — DNA de liderança</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:28px">
+        <div class="skill-pill" style="border-color:#f59e0b">🎯 Comunicação — Alinho expectativas, gerencio stakeholders e traduzo complexidade em clareza para qualquer audiência</div>
+        <div class="skill-pill" style="border-color:#34d399">👑 Liderança & Influência — Construo times de confiança, dou feedbacks construtivos e dirijo com segurança em cenários ambíguos</div>
+        <div class="skill-pill" style="border-color:#60a5fa">🤝 Colaboração — Facilito workshops cross, promovo Design Critique e conecto silos para visão unificada</div>
+        <div class="skill-pill" style="border-color:#a78bfa">📊 Pensamento Estratégico & Data-Driven — Conecto métricas de negócio a decisões de design, antecipo problemas e valido hipóteses com dados</div>
+      </div>
+      <p class="skill-label">Hard Skills — Domínio técnico</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div class="skill-pill" style="border-color:#f472b6">🎨 Visual & Consistência — Design Systems, identidade visual, harmonia e escalabilidade</div>
+        <div class="skill-pill" style="border-color:#fbbf24">⚡ Prototipação & Arquitetura de Info — Fluxos complexos simplificados, acessibilidade e jornadas integradas</div>
+        <div class="skill-pill" style="border-color:#22d3ee">🔍 Pesquisa & Análise — Discovery contínuo, visão 360°, conectando quali e quanti ao negócio</div>
+        <div class="skill-pill" style="border-color:#fb923c">📝 Documentação & Organização — Modelos escaláveis, handoffs de qualidade e governança de design</div>
+        <div class="skill-pill" style="border-color:#f59e0b">✍️ Conteúdo & Textos — Microcopy estratégico, linguagem simples e inclusão textual</div>
+        <div class="skill-pill" style="border-color:#34d399">📈 Métricas de Produto & Negócio — Roadmap data-driven, OKRs, GA, Mixpanel e análise de mercado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>Vamos conversar?</h2>
+    <p>Aberto a oportunidades de liderança em design e produto.</p>
+    <div class="btns">
+      <a href="https://linkedin.com/in/netoandrade" target="_blank" class="btn-primary">🔗 LinkedIn</a>
+      <a href="https://wa.me/5511963862077" target="_blank" class="btn-secondary">💬 WhatsApp</a>
+    </div>
+    <p class="wa-num">+55 11 96386-2077</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Neto Andrade — Product Design Leader</p>
+  </div>
+
+</div>
+
+<script>
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.toggle');
+    const isOpen = body.classList.contains('open');
+
+    document.querySelectorAll('.section-body.open').forEach(b => {
+      if (b !== body) {
+        b.classList.remove('open');
+        b.previousElementSibling.querySelector('.toggle').classList.remove('open');
+      }
+    });
+
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
